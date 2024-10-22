@@ -2,30 +2,30 @@
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
-  }
-  
-  /* Hero Section */
-  .hero {
+}
+
+/* Hero Section */
+.hero {
     text-align: center;
     padding: 4rem 2rem;
     background-color: #2a2a2a;
     border-radius: 12px;
     margin-bottom: 4rem;
-  }
-  
-  .heroTitle {
+}
+
+.heroTitle {
     font-size: 3rem;
     color: white;
     margin-bottom: 1rem;
-  }
-  
-  .heroSubtitle {
+}
+
+.heroSubtitle {
     font-size: 1.25rem;
     color: #e0e0e0;
     margin-bottom: 2rem;
-  }
-  
-  .heroButton {
+}
+
+.heroButton {
     display: inline-block;
     padding: 1rem 2rem;
     background-color: #8646e5;
@@ -35,30 +35,30 @@
     font-size: 1.1rem;
     transition: all 0.3s ease;
     border: 1px solid white;
-  }
-  
-  .heroButton:hover {
+}
+
+.heroButton:hover {
     background-color: rgb(34, 221, 65);
     color: black;
     transform: translateY(-2px);
-  }
-  
-  /* Category Section */
-  .sectionTitle {
+}
+
+/* Category Section */
+.sectionTitle {
     text-align: center;
     font-size: 2rem;
     color: white;
     margin-bottom: 2rem;
-  }
-  
-  .categoryGrid {
+}
+
+.categoryGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
-  }
-  
-  .categoryCard {
+}
+
+.categoryCard {
     background-color: #2a2a2a;
     padding: 2rem;
     border-radius: 8px;
@@ -67,71 +67,71 @@
     color: white;
     transition: transform 0.3s ease;
     border: 1px solid #3a3a3a;
-  }
-  
-  .categoryCard:hover {
+}
+
+.categoryCard:hover {
     transform: translateY(-5px);
-  }
-  
-  .categoryIcon {
+}
+
+.categoryIcon {
     font-size: 3rem;
     display: block;
     margin-bottom: 1rem;
-  }
-  
-  .categoryCard h3 {
+}
+
+.categoryCard h3 {
     margin-bottom: 0.5rem;
     font-size: 1.25rem;
-  }
-  
-  .categoryCard p {
+}
+
+.categoryCard p {
     color: #e0e0e0;
     font-size: 0.9rem;
-  }
-  
-  /* Features Section */
-  .featureGrid {
+}
+
+/* Features Section */
+.featureGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
-  }
-  
-  .featureCard {
+}
+
+.featureCard {
     background-color: #2a2a2a;
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
     border: 1px solid #3a3a3a;
-  }
-  
-  .featureIcon {
+}
+
+.featureIcon {
     font-size: 2.5rem;
     display: block;
     margin-bottom: 1rem;
-  }
-  
-  .featureCard h3 {
+}
+
+.featureCard h3 {
     color: white;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
-  }
-  
-  .featureCard p {
+}
+
+.featureCard p {
     color: #e0e0e0;
     font-size: 0.9rem;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
     .heroTitle {
-      font-size: 2rem;
+        font-size: 2rem;
     }
-  
+    
     .heroSubtitle {
-      font-size: 1rem;
+        font-size: 1rem;
     }
-  
+    
     .container {
-      padding: 1rem;
+        padding: 1rem;
     }
-  }
+}

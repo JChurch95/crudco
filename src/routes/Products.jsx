@@ -39,6 +39,22 @@ const Products = () => {
     }
   };
 
+  // Function to render stars based on rating
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const stars = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<span key={`full-${i}`} className={styles.star}>★</span>);
+    }
+    if (hasHalfStar) {
+      stars.push(<span key="half" className={styles.star}>½</span>);
+    }
+    
+    return <div className={styles.rating}>{stars}</div>;
+  };
+
   return (
     <>
       <h2 className={styles.title}>Products</h2>
@@ -80,6 +96,17 @@ const Products = () => {
                   alt={product.title}
                   className={styles.productImage}
                 />
+                <div className={styles.productInfo}>
+                  <p className={styles.productPrice}>
+                    ${product.price.toFixed(2)}
+                  </p>
+                  <div className={styles.ratingContainer}>
+                    {renderStars(product.rating.rate)}
+                    <span className={styles.ratingCount}>
+                      ({product.rating.count})
+                    </span>
+                  </div>
+                </div>
               </Link>
             </li>
           );
