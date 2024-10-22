@@ -1,0 +1,86 @@
+.title {
+    text-align: center;
+    color: #ffffff;
+    margin: 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.productList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.productCard {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: transform 0.2s;
+}
+
+.productCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.productLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.productTitle {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: #ffffff;
+    line-height: 1.2em;
+    max-height: 2.4em;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.productImage {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-top: 1rem;
+}
+
+.categoryFilter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0 2rem 0;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+}
+
+.filterButton {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #8646e5;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.filterButton:hover {
+    background: #542e8d;
+}
+
+.filterButton.active {
+    background: rgb(34, 221, 65);;
+    color: #000000;
+    border: 1px solid #ffffff;
+}
