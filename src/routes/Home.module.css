@@ -59,18 +59,21 @@
 }
 
 .categoryCard {
-    background-color: #2a2a2a;
+    background-color: #242938;
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
     text-decoration: none;
     color: white;
-    transition: transform 0.3s ease;
-    border: 1px solid #3a3a3a;
+    transition: all 0.2s;
+    border: 1px solid #2f3446;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .categoryCard:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(134, 70, 229, 0.2);
+    border-color: #8646e5;
 }
 
 .categoryIcon {
@@ -97,11 +100,19 @@
 }
 
 .featureCard {
-    background-color: #2a2a2a;
+    background-color: #242938;
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
-    border: 1px solid #3a3a3a;
+    border: 1px solid #2f3446;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+.featureCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(134, 70, 229, 0.2);
+    border-color: #8646e5;
 }
 
 .featureIcon {
