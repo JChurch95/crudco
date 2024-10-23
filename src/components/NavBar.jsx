@@ -22,6 +22,9 @@ const NavBar = () => {
               <li>
                 <Link to="/categories" className={styles.navLink}>Categories</Link>
               </li>
+              <li>
+                <Link to="/registration" className={styles.navLink}>Register</Link>
+              </li>
             </ul>
           </div>
         </div>

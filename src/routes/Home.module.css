@@ -8,9 +8,11 @@
 .hero {
     text-align: center;
     padding: 4rem 2rem;
-    background-color: #2a2a2a;
+    background-color: #242938;
     border-radius: 12px;
     margin-bottom: 4rem;
+    border: 1px solid #2f3446;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .heroTitle {

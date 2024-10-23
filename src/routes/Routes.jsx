@@ -5,13 +5,15 @@ import Categories, { loader as categoriesLoader } from './Categories';
 import Products,{loader as productsLoader} from "./Products";
 import ErrorPage from '../pages/Error';
 import SingleProduct, {loader as singleProductLoader} from './SingleProduct';
+import Registration, { action as registrationAction } from './Registration';
+
 
 
 const Routes = () => {
   const router = createBrowserRouter([
     {
       element: <Layout />,
-      errorElement: <ErrorPage />,
+      //errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -31,6 +33,11 @@ const Routes = () => {
           path: "/categories",
           element: <Categories />,
           loader: categoriesLoader,
+        },
+        {
+          path: "/registration",
+          element: <Registration />,
+          action: registrationAction,
         }
       ],
     },
