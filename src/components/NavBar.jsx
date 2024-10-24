@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 const NavBar = () => {
   return (
@@ -10,20 +10,33 @@ const NavBar = () => {
           <Link to="/" className={styles.logo}>
             Crud Co.
           </Link>
-          
+
           <div className={styles.navLinksContainer}>
             <ul className={styles.navLinks}>
               <li>
-                <Link to="/" className={styles.navLink}>Home</Link>
+                <Link to="/" className={styles.navLink}>
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/products" className={styles.navLink}>Products</Link>
+                <Link to="/products" className={styles.navLink}>
+                  Products
+                </Link>
               </li>
               <li>
-                <Link to="/categories" className={styles.navLink}>Categories</Link>
+                <Link to="/categories" className={styles.navLink}>
+                  Categories
+                </Link>
               </li>
               <li>
-                <Link to="/registration" className={styles.navLink}>Register</Link>
+                <Link to="/registration" className={styles.navLink}>
+                  Register
+                </Link>
+              </li>
+              <li>
+                <Link to="/login" className={styles.navLink}>
+                  Login
+                </Link>
               </li>
             </ul>
           </div>

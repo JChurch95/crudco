@@ -1,9 +1,11 @@
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
+import { useEffect } from "react";
 import { z } from "zod";
-import styles from "./Registration.module.css";
+import styles from "./Login.module.css";
 import supabase from "../supabase";
+import { useAuth } from "../AuthContext";
 
-const RegistrationSchema = z.object({
+const LoginSchema = z.object({
   email: z
     .string()
     .email("Invalid Email")
@@ -13,7 +15,7 @@ const RegistrationSchema = z.object({
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
-  const result = await RegistrationSchema.safeParseAsync({
+  const result = await LoginSchema.safeParseAsync({
     email: formData.get("username"),
     password: formData.get("password"),
   });
@@ -27,23 +29,36 @@ export const action = async ({ request }) => {
   console.log("EMAIL AND PASSWORD: ", email, password);
   console.log("TO BE CONTINUED... ");
 
-  const { data, error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
 
   console.log("DATA AND ERROR: ", data, error);
-  return null;
+
+  return data;
 };
 
-const Registration = () => {
+const Login = () => {
+  const data = useActionData();
+  const { setUser, setSession } = useAuth();
+
+  console.log("DATA: ", data);
+
+  useEffect(() => {
+    if (data?.user && data?.session) {
+      setUser(data.user)
+      setSession(data.session)
+    }
+  }, [data, setUser, setSession])
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Register with us!</h1>
+      <h1 className={styles.title}>Welcome Back! Please Sign In</h1>
       
       <div className={styles.formContainer}>
-        <Form 
-          action="/registration" 
+        <Form
+          action="/login"
           method="post"
           className={styles.form}
         >
@@ -75,11 +90,11 @@ const Registration = () => {
             </label>
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={styles.button}
           >
-            Register
+            Login
           </button>
         </Form>
       </div>
@@ -87,4 +102,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Login;

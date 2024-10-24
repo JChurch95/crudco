@@ -1,0 +1,131 @@
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+    text-align: center;
+    color: #ffffff;
+    margin: 2rem 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.formContainer {
+    background-color: #242938;
+    border: 1px solid #2f3446;
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.formContainer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(134, 70, 229, 0.2);
+    border-color: #8646e5;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    display: block;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.labelText {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #2f3446;
+    border-radius: 4px;
+    background-color: #1e222f;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #8646e5;
+    box-shadow: 0 0 0 2px rgba(134, 70, 229, 0.2);
+}
+
+.input::placeholder {
+    color: #6c757d;
+}
+
+.button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #8646e5;
+    color: #ffffff;
+    border: 1px solid white;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.button:hover {
+    background-color: rgb(34, 221, 65);
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+.button:disabled {
+    background-color: #4a4a4a;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #ff4d4d;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .formContainer {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+}
+
+/* Optional: Add animation for form submission */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Optional: Success message styling */
+.successMessage {
+    text-align: center;
+    color: rgb(34, 221, 65);
+    margin-top: 1rem;
+    font-weight: 500;
+}
