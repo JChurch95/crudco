@@ -47,8 +47,8 @@ const Login = () => {
 
   useEffect(() => {
     if (data?.user && data?.session) {
-      setUser(data.user)
-      setSession(data.session)
+      setUser(data.user.id)
+      setSession(data.session.access_token)
     }
   }, [data, setUser, setSession])
 
