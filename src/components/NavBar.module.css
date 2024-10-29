@@ -1,79 +1,98 @@
 .navbar {
-    background-color: #8646e5;
-    width: 100vw; /* Full viewport width */
-    padding: 1rem 0;
-    margin: 0;
-    box-shadow: none;
-    position: relative;
-    left: 0;
-    right: 0;
-  }
-  
-  .container {
-    width: 100%;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between; /* This spreads content to both ends */
-    align-items: center;
-    margin: 0;
-    border: none;
-  }
-  
-  .leftSection {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo {
-    color: white;
-    text-decoration: none;
-    font-size: 1.75rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-right: 4rem;
-    margin-left: 0rem;
-  }
-  
-  .navLinks {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navLink {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    opacity: 0.9;
-    transition: opacity 0.2s ease;
-  }
-  
-  .navLink:hover {
-    opacity: 1;
-    color: rgb(34, 221, 65);
-  }
-  
-  .socialLinks {
-    display: flex;
-    gap: 1rem;
-    margin-left: auto; /* Pushes social links to the right */
-    margin-right: 2rem;
-  }
-  
-  .socialButton {
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem;
-    transition: color 0.2s ease; /* Added smooth transition */
-  }
-  
-  .socialButton:hover {
-    color: rgb(34, 221, 65); /* Matched the hover color with navLink */
-  }
+  background-color: #8646e5;
+  width: 100vw; /* Full viewport width */
+  padding: 1rem 0;
+  margin: 0;
+  box-shadow: none;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+.container {
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between; /* This spreads content to both ends */
+  align-items: center;
+  margin: 0;
+  border: none;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+  font-size: 1.75rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-right: 4rem;
+  margin-left: 0rem;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.navLink:hover {
+  opacity: 1;
+  color: rgb(34, 221, 65);
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto; /* Pushes social links to the right */
+  margin-right: 2rem;
+}
+
+.socialButton {
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s ease; /* Added smooth transition */
+}
+
+.socialButton:hover {
+  color: rgb(34, 221, 65); /* Matched the hover color with navLink */
+}
+
+/* Updated button styles to match navigation links */
+.button {
+  color: white;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  padding: 0;
+}
+
+.button:hover {
+  opacity: 1;
+  color: rgb(34, 221, 65);
+}

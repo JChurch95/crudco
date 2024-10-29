@@ -1,8 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { useAuth } from "../AuthContext";
 
 const NavBar = () => {
+  const { user, token, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const { error } = await logout();
+    if (!error) {
+      navigate("/login");
+    }
+  };
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
@@ -28,21 +39,36 @@ const NavBar = () => {
                   Categories
                 </Link>
               </li>
-              <li>
-                <Link to="/registration" className={styles.navLink}>
-                  Register
-                </Link>
-              </li>
-              <li>
-                <Link to="/login" className={styles.navLink}>
-                  Login
-                </Link>
-              </li>
+              {!user && !token && (
+                <>
+                  <li>
+                    <Link to="/registration" className={styles.navLink}>
+                      Register
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/login" className={styles.navLink}>
+                      Login
+                    </Link>
+                  </li>
+                </>
+              )}
+              {user && token && (
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className={
+                      styles.button
+                    } /* Updated to match Login button class */
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>
 
-        {/* Social Media Icons on the right */}
         <div className={styles.socialLinks}>
           <button className={styles.socialButton}>
             <Facebook size={20} />

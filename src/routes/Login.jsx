@@ -1,9 +1,7 @@
-import { Form, useActionData } from "react-router-dom";
-import { useEffect } from "react";
+import { Form, useActionData, Navigate } from "react-router-dom";
 import { z } from "zod";
 import styles from "./Login.module.css";
 import supabase from "../supabase";
-import { useAuth } from "../AuthContext";
 
 const LoginSchema = z.object({
   email: z
@@ -41,16 +39,11 @@ export const action = async ({ request }) => {
 
 const Login = () => {
   const data = useActionData();
-  const { setUser, setSession } = useAuth();
 
-  console.log("DATA: ", data);
-
-  useEffect(() => {
-    if (data?.user && data?.session) {
-      setUser(data.user.id)
-      setSession(data.session.access_token)
-    }
-  }, [data, setUser, setSession])
+  if (!!data) {
+    return <Navigate to="/" replace />;
+  }
+  
 
   return (
     <div className={styles.container}>
