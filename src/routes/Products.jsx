@@ -1,21 +1,42 @@
 import { useLoaderData, Link, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "./Products.module.css";
-import { categories } from "./Categories";
 
 export const loader = async () => {
-  const apiUrl = `${import.meta.env.VITE_API_URL}/products`;
-  const data = await fetch(apiUrl).then((response) => response.json());
-  return data;
+  try {
+    const categoriesUrl = `${import.meta.env.VITE_API_URL}/api/categories/`;
+    const productsUrl = `${import.meta.env.VITE_API_URL}/api/products/`;
+
+    const [categoriesResponse, productsResponse] = await Promise.all([
+      fetch(categoriesUrl),
+      fetch(productsUrl)
+    ]);
+
+    if (!categoriesResponse.ok || !productsResponse.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
+    const categories = await categoriesResponse.json();
+    const products = await productsResponse.json();
+
+    // Log responses to help with debugging
+    console.log('Categories:', categories);
+    console.log('Products:', products);
+
+    return { products: products || [], categories };
+  } catch (error) {
+    console.error('Error loading data:', error);
+    // Return empty arrays instead of throwing to prevent page crash
+    return { products: [], categories: [] };
+  }
 };
 
 const Products = () => {
-  const products = useLoaderData();
+  const { products, categories } = useLoaderData();
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category");
   const [selectedCategory, setSelectedCategory] = useState(categoryParam || "all");
 
-  // Update selected category when URL parameter changes
   useEffect(() => {
     if (categoryParam) {
       setSelectedCategory(categoryParam);
@@ -27,7 +48,7 @@ const Products = () => {
       ? products
       : products.filter(
           (product) =>
-            product.category.toLowerCase() === selectedCategory.toLowerCase()
+            product.category_name?.toLowerCase() === selectedCategory.toLowerCase()
         );
 
   const handleCategoryChange = (category) => {
@@ -37,22 +58,6 @@ const Products = () => {
     } else {
       setSearchParams({ category });
     }
-  };
-
-  // Function to render stars based on rating
-  const renderStars = (rating) => {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    const stars = [];
-
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<span key={`full-${i}`} className={styles.star}>★</span>);
-    }
-    if (hasHalfStar) {
-      stars.push(<span key="half" className={styles.star}>½</span>);
-    }
-    
-    return <div className={styles.rating}>{stars}</div>;
   };
 
   return (
@@ -69,9 +74,9 @@ const Products = () => {
           All
         </button>
 
-        {categories.map(({ name }) => (
+        {categories.map(({ id, name }) => (
           <button
-            key={name}
+            key={id}
             onClick={() => handleCategoryChange(name)}
             className={`${styles.filterButton} ${
               selectedCategory === name ? styles.active : ""
@@ -82,36 +87,53 @@ const Products = () => {
         ))}
       </div>
 
-      <ul className={styles.productList}>
-        {filteredProducts.map((product) => {
-          return (
+      {filteredProducts.length === 0 ? (
+        <div className={styles.emptyState}>
+          <p>No products available {selectedCategory !== "all" ? `in ${selectedCategory}` : ""}</p>
+          {selectedCategory !== "all" && (
+            <button
+              onClick={() => handleCategoryChange("all")}
+              className={styles.filterButton}
+            >
+              View All Products
+            </button>
+          )}
+        </div>
+      ) : (
+        <ul className={styles.productList}>
+          {filteredProducts.map((product) => (
             <li key={product.id} className={styles.productCard}>
               <Link
                 to={`/products/${product.id}`}
                 className={styles.productLink}
               >
-                <h3 className={styles.productTitle}>{product.title}</h3>
+                <h3 className={styles.productTitle}>{product.name}</h3>
                 <img
-                  src={product.image}
-                  alt={product.title}
+                  src={product.image_url}
+                  alt={product.name}
                   className={styles.productImage}
                 />
                 <div className={styles.productInfo}>
                   <p className={styles.productPrice}>
-                    ${product.price.toFixed(2)}
+                    ${product.price?.toFixed(2)}
                   </p>
-                  <div className={styles.ratingContainer}>
-                    {renderStars(product.rating.rate)}
-                    <span className={styles.ratingCount}>
-                      ({product.rating.count})
-                    </span>
-                  </div>
+                  {product.rating_value && (
+                    <div className={styles.ratingContainer}>
+                      <div className={styles.rating}>
+                        {"★".repeat(Math.floor(product.rating_value))}
+                        {product.rating_value % 1 >= 0.5 ? "½" : ""}
+                      </div>
+                      <span className={styles.ratingCount}>
+                        ({product.rating_count})
+                      </span>
+                    </div>
+                  )}
                 </div>
               </Link>
             </li>
-          );
-        })}
-      </ul>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
