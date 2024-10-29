@@ -3,6 +3,9 @@
     font-family: 'Montserrat', sans-serif;
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .title {
@@ -17,21 +20,15 @@
 .categoriesGrid {
     list-style: none;
     padding: 0;
-    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 250px);
     gap: 2rem;
     padding: 1rem;
-    max-width: 1200px;
-}
-
-@media (min-width: 1024px) {
-    .categoriesGrid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+    margin: 0;
 }
 
 .categoryCard {
+    width: 250px;
     background-color: #242938;
     border: 1px solid #2f3446;
     border-radius: 8px;
