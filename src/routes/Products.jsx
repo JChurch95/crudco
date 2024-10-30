@@ -1,32 +1,41 @@
 import { useLoaderData, Link, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "./Products.module.css";
+import AddToCartBtn from "../components/AddToCartBtn";
 
 export const loader = async () => {
   try {
-    const categoriesUrl = `${import.meta.env.VITE_API_URL}/api/categories/`;
-    const productsUrl = `${import.meta.env.VITE_API_URL}/api/products/`;
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY;
 
     const [categoriesResponse, productsResponse] = await Promise.all([
-      fetch(categoriesUrl),
-      fetch(productsUrl)
+      fetch(`${supabaseUrl}/rest/v1/categories`, {
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+      }),
+      fetch(`${supabaseUrl}/rest/v1/products`, {
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+      }),
     ]);
 
     if (!categoriesResponse.ok || !productsResponse.ok) {
-      throw new Error('Failed to fetch data');
+      throw new Error("Failed to fetch data");
     }
 
     const categories = await categoriesResponse.json();
     const products = await productsResponse.json();
 
-    // Log responses to help with debugging
-    console.log('Categories:', categories);
-    console.log('Products:', products);
+    console.log("Categories:", categories);
+    console.log("Products:", products);
 
-    return { products: products || [], categories };
+    return { products, categories };
   } catch (error) {
-    console.error('Error loading data:', error);
-    // Return empty arrays instead of throwing to prevent page crash
+    console.error("Error loading data:", error);
     return { products: [], categories: [] };
   }
 };
@@ -35,7 +44,9 @@ const Products = () => {
   const { products, categories } = useLoaderData();
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category");
-  const [selectedCategory, setSelectedCategory] = useState(categoryParam || "all");
+  const [selectedCategory, setSelectedCategory] = useState(
+    categoryParam || "all"
+  );
 
   useEffect(() => {
     if (categoryParam) {
@@ -44,12 +55,12 @@ const Products = () => {
   }, [categoryParam]);
 
   const filteredProducts =
-    selectedCategory === "all"
-      ? products
-      : products.filter(
-          (product) =>
-            product.category_name?.toLowerCase() === selectedCategory.toLowerCase()
-        );
+  selectedCategory === "all"
+    ? products
+    : products.filter((product) => {
+        const category = categories.find(c => c.name.toLowerCase() === selectedCategory.toLowerCase());
+        return product.category_id === category?.id;
+      });
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -89,7 +100,10 @@ const Products = () => {
 
       {filteredProducts.length === 0 ? (
         <div className={styles.emptyState}>
-          <p>No products available {selectedCategory !== "all" ? `in ${selectedCategory}` : ""}</p>
+          <p>
+            No products available{" "}
+            {selectedCategory !== "all" ? `in ${selectedCategory}` : ""}
+          </p>
           {selectedCategory !== "all" && (
             <button
               onClick={() => handleCategoryChange("all")}
@@ -120,16 +134,31 @@ const Products = () => {
                   {product.rating_value && (
                     <div className={styles.ratingContainer}>
                       <div className={styles.rating}>
-                        {"★".repeat(Math.floor(product.rating_value))}
-                        {product.rating_value % 1 >= 0.5 ? "½" : ""}
+                        {[...Array(5)].map((_, index) => (
+                          <span
+                            key={index}
+                            style={{
+                              color:
+                                index < Math.floor(product.rating_value / 10)
+                                  ? "gold"
+                                  : "#ccc",
+                            }}
+                          >
+                            ★
+                          </span>
+                        ))}
+                        <span className={styles.ratingValue}>
+                          {(product.rating_value / 10).toFixed(1)}
+                        </span>
                       </div>
                       <span className={styles.ratingCount}>
-                        ({product.rating_count})
+                        ({product.rating_count} reviews)
                       </span>
                     </div>
                   )}
                 </div>
               </Link>
+              <AddToCartBtn product={product} />
             </li>
           ))}
         </ul>

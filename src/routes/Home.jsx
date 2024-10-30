@@ -6,8 +6,8 @@ const Home = () => {
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <h1 className={styles.heroTitle}>Welcome to Crud Co.</h1>
-        <p className={styles.heroSubtitle}>Your One-Stop Shop for Quality Products</p>
+        <h1 className={styles.heroTitle}>Welcome to Mall Rats</h1>
+        <p className={styles.heroSubtitle}>Your Local Skate Plug</p>
         <Link to="/products" className={styles.heroButton}>
           Explore Our Products
         </Link>

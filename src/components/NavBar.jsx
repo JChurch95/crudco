@@ -2,9 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { useAuth } from "../AuthContext";
+import { useCart } from "../CartContext";
+import CartNotifier from "./CartNotifier";
 
 const NavBar = () => {
   const { user, token, logout } = useAuth();
+  const { cartItems }= useCart();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -19,7 +22,7 @@ const NavBar = () => {
       <div className={styles.container}>
         <div className={styles.leftSection}>
           <Link to="/" className={styles.logo}>
-            Crud Co.
+            Mall Rats
           </Link>
 
           <div className={styles.navLinksContainer}>
@@ -70,6 +73,7 @@ const NavBar = () => {
         </div>
 
         <div className={styles.socialLinks}>
+        <li>{CartNotifier}</li>
           <button className={styles.socialButton}>
             <Facebook size={20} />
           </button>

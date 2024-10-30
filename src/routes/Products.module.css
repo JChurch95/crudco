@@ -24,6 +24,9 @@
     padding: 1rem;
     transition: transform 0.2s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .productCard:hover {
@@ -94,12 +97,11 @@
     border: 1px solid #ffffff;
 }
 
-/* New styles for product info */
 .productInfo {
     padding: 0.75rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
     margin-top: 1rem;
     background-color: #1e222f;
     border-radius: 6px;
@@ -114,28 +116,27 @@
 }
 
 .ratingContainer {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    white-space: nowrap;
 }
 
 .rating {
-    color: #ffd700;
     display: flex;
-    gap: 2px;
+    align-items: center;
+    gap: 0.25rem;
+    color: #ffd700;
 }
 
-.star {
-    font-size: 1rem;
+.ratingValue, .ratingCount {
+    color: #a0a0a0;
+    font-size: 0.85rem;
 }
 
 .ratingCount {
     color: #a0a0a0;
-    font-size: 0.9rem;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
 }
 
 .emptyState {
@@ -144,10 +145,30 @@
     background: #f5f5f5;
     border-radius: 8px;
     margin: 2rem 0;
-  }
-  
-  .emptyState p {
+}
+
+.emptyState p {
     margin-bottom: 1rem;
     color: #666;
     font-size: 1.1rem;
-  }
+}
+
+/* Add to Cart button styles matching filter buttons */
+.addToCartBtn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #8646e5;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    width: fit-content;
+}
+
+.addToCartBtn:hover {
+    background: #542e8d;
+}
