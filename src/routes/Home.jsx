@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import styles from './Home.module.css';
 
 const Home = () => {
+  const categories = useLoaderData();
+
   return (
     <div className={styles.container}>
       {/* Hero Section */}
@@ -17,26 +20,21 @@ const Home = () => {
       <section className={styles.categories}>
         <h2 className={styles.sectionTitle}>Shop by Category</h2>
         <div className={styles.categoryGrid}>
-          <Link to="/products?category=Electronics" className={styles.categoryCard}>
-            <span className={styles.categoryIcon}>🔌</span>
-            <h3>Electronics</h3>
-            <p>Discover our tech collection</p>
-          </Link>
-          <Link to="/products?category=Jewelery" className={styles.categoryCard}>
-            <span className={styles.categoryIcon}>💍</span>
-            <h3>Jewelery</h3>
-            <p>Elegant accessories</p>
-          </Link>
-          <Link to="/products?category=Men's Clothing" className={styles.categoryCard}>
-            <span className={styles.categoryIcon}>👔</span>
-            <h3>Men's Clothing</h3>
-            <p>Stylish menswear</p>
-          </Link>
-          <Link to="/products?category=Women's Clothing" className={styles.categoryCard}>
-            <span className={styles.categoryIcon}>👗</span>
-            <h3>Women's Clothing</h3>
-            <p>Trendy fashion</p>
-          </Link>
+          {categories && categories.length > 0 ? (
+            categories.map(({ id, name, emoji }) => (
+              <Link 
+                key={id}
+                to={`/products?category=${encodeURIComponent(name)}`} 
+                className={styles.categoryCard}
+              >
+                <span className={styles.categoryIcon}>{emoji}</span>
+                <h3>{name}</h3>
+                <p>Explore {name}</p>
+              </Link>
+            ))
+          ) : (
+            <p className={styles.emptyState}>No categories available.</p>
+          )}
         </div>
       </section>
 

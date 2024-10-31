@@ -1,15 +1,27 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from "../pages/Layout";
+import { Navigate } from 'react-router-dom';
+import Layout from '../pages/Layout';
 import Home from './Home';
-import Categories, { loader as categoriesLoader } from './Categories';
-import Products, { loader as productsLoader } from "./Products";
-import ErrorPage from '../pages/Error';
+import Products, { loader as productsLoader } from './Products';
 import SingleProduct, { loader as singleProductLoader } from './SingleProduct';
+import Categories, { loader as categoriesLoader } from './Categories';
 import Registration, { action as registrationAction } from './Registration';
 import Login, { action as loginAction } from './Login';
+import Dashboard, { action as dashboardAction } from './Dashboard';
+import { useAuth } from '../AuthContext';
 
-// Move router creation outside the component
-export const router = createBrowserRouter([
+// Protected Layout wrapper component
+const ProtectedLayout = ({ children }) => {
+  const { user, token } = useAuth();
+  
+  if (!user || !token) {
+    return <Navigate to="/login" />;
+  }
+  
+  return children;
+};
+
+// Define public routes configuration
+export const publicRoutes = [
   {
     element: <Layout />,
     //errorElement: <ErrorPage />,
@@ -17,6 +29,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        loader: categoriesLoader
       },
       {
         path: "/products",
@@ -42,14 +55,17 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
         action: loginAction,
-      }
+      },
+      // Protected Dashboard route
+      {
+        path: "/dashboard",
+        element: (
+          <ProtectedLayout>
+            <Dashboard />
+          </ProtectedLayout>
+        ),
+        action: dashboardAction
+      },
     ],
   },
-]);
-
-// Simplified Routes component
-const Routes = () => {
-  return <RouterProvider router={router} />;
-};
-
-export default Routes;
+];

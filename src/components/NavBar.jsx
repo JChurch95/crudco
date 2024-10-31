@@ -6,10 +6,14 @@ import { useCart } from "../CartContext";
 import CartNotifier from "./CartNotifier";
 
 const NavBar = () => {
+  // Get authentication state and logout function from AuthContext
   const { user, token, logout } = useAuth();
-  const { cartItems }= useCart();
+  // Get cart state from CartContext
+  const { cartItems } = useCart();
+  // Hook for programmatic navigation
   const navigate = useNavigate();
 
+  // Logout handler - called when user clicks logout button
   const handleLogout = async () => {
     const { error } = await logout();
     if (!error) {
@@ -22,11 +26,12 @@ const NavBar = () => {
       <div className={styles.container}>
         <div className={styles.leftSection}>
           <Link to="/" className={styles.logo}>
-            Mall Rats
+            Mall Rats 🐀
           </Link>
 
           <div className={styles.navLinksContainer}>
             <ul className={styles.navLinks}>
+              {/* These links are always visible regardless of auth state */}
               <li>
                 <Link to="/" className={styles.navLink}>
                   Home
@@ -42,6 +47,8 @@ const NavBar = () => {
                   Categories
                 </Link>
               </li>
+
+              {/* Show these links only when user is NOT logged in */}
               {!user && !token && (
                 <>
                   <li>
@@ -56,33 +63,37 @@ const NavBar = () => {
                   </li>
                 </>
               )}
+
+              {/* Show these links only when user IS logged in */}
               {user && token && (
-                <li>
-                  <button
-                    onClick={handleLogout}
-                    className={
-                      styles.button
-                    } /* Updated to match Login button class */
-                  >
-                    Logout
-                  </button>
-                </li>
+                <>
+                  <li>
+                    <Link to="/dashboard" className={styles.navLink}>
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className={styles.button}>
+                      Logout
+                    </button>
+                  </li>
+                </>
               )}
             </ul>
           </div>
         </div>
 
         <div className={styles.socialLinks}>
-        <li>{CartNotifier}</li>
-          <button className={styles.socialButton}>
+          <CartNotifier />
+          <a href="#" className={styles.socialButton}>
             <Facebook size={20} />
-          </button>
-          <button className={styles.socialButton}>
+          </a>
+          <a href="#" className={styles.socialButton}>
             <Instagram size={20} />
-          </button>
-          <button className={styles.socialButton}>
+          </a>
+          <a href="#" className={styles.socialButton}>
             <Linkedin size={20} />
-          </button>
+          </a>
         </div>
       </div>
     </nav>
