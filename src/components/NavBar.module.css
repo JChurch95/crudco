@@ -60,6 +60,7 @@
 
 .socialLinks {
   display: flex;
+  align-items: center; /* Added this line */
   gap: 1rem;
   margin-left: auto; /* Pushes social links to the right */
   margin-right: 2rem;

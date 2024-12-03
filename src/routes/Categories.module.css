@@ -11,6 +11,10 @@
 .title {
     text-align: center;
     color: #ffffff;
+    text-shadow: -1px -1px 0 #000000, 
+                 1px -1px 0 #000000, 
+                 -1px 1px 0 #000000, 
+                 1px 1px 0 #000000;
     margin: 2rem 0;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;

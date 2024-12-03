@@ -18,6 +18,10 @@
 .heroTitle {
     font-size: 3rem;
     color: white;
+    text-shadow: -1px -1px 0 #000000, 
+                 1px -1px 0 #000000, 
+                 -1px 1px 0 #000000, 
+                 1px 1px 0 #000000;
     margin-bottom: 1rem;
 }
 
@@ -50,6 +54,10 @@
     text-align: center;
     font-size: 2rem;
     color: white;
+    text-shadow: -1px -1px 0 #000000, 
+                 1px -1px 0 #000000, 
+                 -1px 1px 0 #000000, 
+                 1px 1px 0 #000000;
     margin-bottom: 2rem;
 }
 

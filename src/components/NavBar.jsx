@@ -85,13 +85,25 @@ const NavBar = () => {
 
         <div className={styles.socialLinks}>
           <CartNotifier />
-          <a href="#" className={styles.socialButton}>
+          <a
+            href="https://facebook.com/your-page"
+            className={styles.socialButton}
+            aria-label="Facebook"
+          >
             <Facebook size={20} />
           </a>
-          <a href="#" className={styles.socialButton}>
+          <a
+            href="https://instagram.com/your-handle"
+            className={styles.socialButton}
+            aria-label="Instagram"
+          >
             <Instagram size={20} />
           </a>
-          <a href="#" className={styles.socialButton}>
+          <a
+            href="https://linkedin.com/company/your-company"
+            className={styles.socialButton}
+            aria-label="LinkedIn"
+          >
             <Linkedin size={20} />
           </a>
         </div>
